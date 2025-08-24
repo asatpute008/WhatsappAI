@@ -18,7 +18,7 @@ public class ReplyFunctions {
 
 
     // Replace with your Gemini API Key
-    private static final String API_KEY = "AIzaSyB3d9wBuKf8z2YqK3uZAO9UmFkmGHsG0AA";
+    private static final String API_KEY = "AIzaSyB0bPYwJaF6ZolMmH9HooTJjqNvr3OfRW4";
 
         public static String generateReply(String userMessage) {
             String responseText = "";

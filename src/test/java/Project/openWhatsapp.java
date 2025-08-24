@@ -10,13 +10,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class openWhatsapp {
-	String Arya ;
+	WebDriver driver;
+	
+	
+	public String Arya = "" ;
 	String lastMessageText = "";
 	String EndChat = null;
 	String currentLastMessage;
 	int nextChat = 0;
-
-	WebDriver driver;
 
 	public openWhatsapp(WebDriver Rdriver) {
 		this.driver =Rdriver;
@@ -26,6 +27,7 @@ public class openWhatsapp {
 
 	}
 
+	//open Whatsapp Site
 	public void OpenWhatsapp() {
 		driver = new ChromeDriver();
 		System.setProperty("webdriver.chrome.driver", "D:\\MangePanel\\Whatsapphandel\\src\\test\\resources\\Driver\\chromedriver.exe");
@@ -44,7 +46,7 @@ public class openWhatsapp {
 
 
 
-
+  // CheckChats Chat List 
 	public void readCurrentMessage() throws InterruptedException {
 		do {
 			Thread.sleep(500);
@@ -53,14 +55,14 @@ public class openWhatsapp {
 			driver.findElement(By.xpath("//div[text()='Unread']")).click();
 
 			openWhatsapp Avail = new openWhatsapp(driver);
-			Avail.ChatAvailibility();
+			Arya = Avail.ChatAvailibility();
 			System.out.println("Final Execution: "+Arya);
-		}while(!this.Arya.equals("LogOut"));
+		}while(!" LogOut".equals(Arya));
 
 	}
 
 
-	public void ChatAvailibility() throws InterruptedException {
+	public String ChatAvailibility() throws InterruptedException {
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		List<WebElement> NewChat = driver.findElements(By.xpath("//div[@class='x10l6tqk xh8yej3 x1g42fcv']/div/div/div/div[2]/div[2]/div[2]/span/div"));
@@ -70,16 +72,20 @@ public class openWhatsapp {
 			driver.findElement(By.xpath("(//div[@class='x10l6tqk xh8yej3 x1g42fcv'])[1]")).click();
 			Thread.sleep(2000);
 			openWhatsapp reply = new openWhatsapp(driver);
-			reply.replyMessage();
+			String ValueForArya = reply.replyMessage();
 			System.out.println("Exit chat");
+			
+			return ValueForArya ;
 		}
 		else {
 			System.out.println("Chats Not Available");
+			return null;
 		}
 	}
 
-	public void replyMessage() throws InterruptedException {
-
+	public String replyMessage() throws InterruptedException {
+    
+		   String returnValue = null;
 		//long startTime = System.currentTimeMillis(); // start time
 		do{
 
@@ -90,7 +96,7 @@ public class openWhatsapp {
 				currentLastMessage = messages.get(messages.size() - 1).getText();
 				System.out.println("Last message: " + currentLastMessage);
 
-				if (messages.size() > 0) {
+				if (!currentLastMessage.equals(lastMessageText)) {
 					lastMessageText = currentLastMessage;
 					WebElement lastMessage = messages.get(messages.size() - 1);
 
@@ -101,8 +107,15 @@ public class openWhatsapp {
 					System.out.println("Received Message: " + messageText);
 
 					EndChat = messageText;
-					Arya = messageText;
-
+					
+					returnValue = messageText;
+					System.out.println("Final Execution: " + returnValue);
+					
+					
+					if(returnValue.equals("Logout")){
+						break;
+					};
+					
 					// Call reply function
 					ReplyFunctions ChatGPTReply = new ReplyFunctions();	
 					String Send = ChatGPTReply.generateReply(messageText);
@@ -129,6 +142,10 @@ public class openWhatsapp {
 			}
 			Thread.sleep(3000); // check every 3 seconds
 		} while (nextChat < 8);
+		
+		return returnValue;
 	}
-
+	
+	
+ 
 }
