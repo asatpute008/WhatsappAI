@@ -8,9 +8,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WhatsappPanel {
 
@@ -24,6 +27,7 @@ public class WhatsappPanel {
 	}
 
 	String currentLastMessage;
+	String userID;
 
 	//Open Site and closed unwanted model
 	public void openWhatsapp() {
@@ -34,11 +38,14 @@ public class WhatsappPanel {
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
-		try {
-			driver.findElement(By.xpath("//div[text()='Continue']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		}catch(NoSuchElementException e) {
-			System.out.println("Element not found " + e.getMessage());
+		try {
+		    WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Continue']")));
+		    continueButton.click();
+		    System.out.println("Clicked on Continue button");
+		} catch (TimeoutException e) {
+		    System.out.println("Element not found within timeout: " + e.getMessage());
 		}
 	}
 
@@ -66,6 +73,7 @@ public class WhatsappPanel {
 				System.out.println("Available");
 				driver.findElement(By.xpath("(//div[@class='x10l6tqk xh8yej3 x1g42fcv'])[1]")).click();
 				Thread.sleep(2000);	
+				
 				return true;
 			}
 			else {
@@ -81,6 +89,10 @@ public class WhatsappPanel {
 	public String  readMessage() {
 
 			try {
+				//find person name in chat 
+				String getUserName = driver.findElement(By.xpath("(//div[@class='x78zum5 x1cy8zhl x1y332i5 xggjnk3 x1yc453h']/div/div/div/span)[1]")).getText();
+				userID = getUserName;
+				
 				List<WebElement> messages = driver.findElements(By.cssSelector("div.message-in"));  
 
 				currentLastMessage = messages.get(messages.size() - 1).getText();
@@ -104,13 +116,21 @@ public class WhatsappPanel {
 	}
 
 	public String generateReply(String messageText) {
+		   
 		try {
 			ReplyFunctions ChatGPTReply = new ReplyFunctions();	
-			String Send = ChatGPTReply.generateReply(messageText);
-
+			shotreplyFunction shotGenerate = new shotreplyFunction();
+			
+			String sendShot = shotGenerate.generateReply(userID, messageText);
+			if(sendShot.equals("Not available")) {
+				String Send = ChatGPTReply.generateReply(userID , messageText);
+				
+				sendShot = Send;
+			};
+		
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			System.out.println("Response -"+Send);
-			return Send;
+			System.out.println("Response -"+sendShot);
+			return sendShot;
 		}catch(NoSuchElementException e) {
 			System.out.println("Element not fond in Response generation"+ e.getMessage());
 

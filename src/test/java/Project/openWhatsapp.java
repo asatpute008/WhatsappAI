@@ -17,6 +17,7 @@ public class openWhatsapp {
 	String lastMessageText = "";
 	String EndChat = null;
 	String currentLastMessage;
+	String userID;
 	int nextChat = 0;
 
 	public openWhatsapp(WebDriver Rdriver) {
@@ -71,6 +72,11 @@ public class openWhatsapp {
 			System.out.println("Available");
 			driver.findElement(By.xpath("(//div[@class='x10l6tqk xh8yej3 x1g42fcv'])[1]")).click();
 			Thread.sleep(2000);
+			
+			//find person name in chat 
+			String getUserName = driver.findElement(By.xpath("(//div[@class='x78zum5 x1cy8zhl x1y332i5 xggjnk3 x1yc453h']/div/div/div/span)[1]")).getText();
+			userID = getUserName;
+			
 			openWhatsapp reply = new openWhatsapp(driver);
 			String ValueForArya = reply.replyMessage();
 			System.out.println("Exit chat");
@@ -118,7 +124,7 @@ public class openWhatsapp {
 					
 					// Call reply function
 					ReplyFunctions ChatGPTReply = new ReplyFunctions();	
-					String Send = ChatGPTReply.generateReply(messageText);
+					String Send = ChatGPTReply.generateReply(userID, messageText);
 
 					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 					System.out.println("Response -"+Send);

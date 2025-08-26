@@ -9,12 +9,7 @@ public class RunClass {
 	static int Count;
 	static Boolean onChatMessage;
 	public static void main(String[] args) throws InterruptedException, AWTException {
-
-		//		openWhatsapp Help = new openWhatsapp();
-		//		Help.OpenWhatsapp();
-		//		Thread.sleep(1000);
-		//		Help.readCurrentMessage();
-
+		
 		WhatsappPanel Help = new WhatsappPanel();
 		Help.openWhatsapp();
 		do { 
