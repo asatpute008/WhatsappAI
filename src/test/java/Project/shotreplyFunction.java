@@ -11,6 +11,17 @@ public class shotreplyFunction {
 	    }
 
 	    String lowerMsg = messageText.toLowerCase();
+	    
+	    if (lowerMsg.contains("you") && (lowerMsg.contains("job") || lowerMsg.contains("work"))) {
+	        return "I am a Software tester";
+	    };
+	    
+	    if(lowerMsg.contains("fev") && (lowerMsg.contains("like") || lowerMsg.contains("Food"))) {
+	    	  return "Methi , siple dal, Rice, chapati";
+	    };
+	    
+	    
+	    
 
 	    // Map of keywords → reply
 	    Map<String[], String> replyMap = new LinkedHashMap<>();
@@ -18,10 +29,9 @@ public class shotreplyFunction {
 	    replyMap.put(new String[]{"hello", "hey", "hii", "how are you", "kasaha"}, "hello "+userId);
 	    replyMap.put(new String[]{"thank you", "thanks", "thx", "tnx"}, "Welcome!");
 	    replyMap.put(new String[]{"bye", "goodbye", "see you", "take care"}, "Bye, take care!");
-//	    replyMap.put(new String[]{"yes", "yaa", "ha", "ok"}, "Okay, noted!");
-//	    replyMap.put(new String[]{"no", "na", "nahi"}, "Alright, no problem.");
-//	    replyMap.put(new String[]{"what is your name", "your name"}, "I am Arya assistent of Mr Aniket");
-	    replyMap.put(new String[]{"joke", "funny", "laugh"}, "Here's a joke for you: Why don’t skeletons fight each other? They don’t have the guts!");
+	    replyMap.put(new String[]{"what is your name", "your name", "who","who are you"}, "Hii, I am Aniket");
+	    replyMap.put(new String[]{"qualification", "edjucation", "qlf.", "edu", "degree"}, "I completed Bachelor of Engineering in Electronics and Telecommunication");
+	    
 
 	    // Check message against all keywords
 	    for (Map.Entry<String[], String> entry : replyMap.entrySet()) {
@@ -39,7 +49,7 @@ public class shotreplyFunction {
 	public static void main(String[] args) {
 		shotreplyFunction help = new shotreplyFunction();
 		
-		System.out.println(help.generateReply("Vidi", "Ani"));
+		System.out.println(help.generateReply("Vidi","job"));
 	}
 
 }

@@ -25,7 +25,7 @@ public class generateSentiment {
 			return ReturnMessage;
 		}else {
 			String History = ChatHistory.readFile(userName);
-			String ReturnMessage = "This is last chats "+ History + "\n generate the reply for in one line reply for'" + newMessage + "'"+ "if they need some information please creat the message for that if not want information simple generate one line replya";
+			String ReturnMessage = "This is last chats "+ History + "\n generate the reply for in one line reply for '" + newMessage + "'";
 			ChatHistory.storeRecivedMessage(userName, newMessage);
 			// First message case
 			return ReturnMessage;

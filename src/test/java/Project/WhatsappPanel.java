@@ -27,7 +27,7 @@ public class WhatsappPanel {
 	}
 
 	String currentLastMessage;
-	String userID;
+//	String userID;
 
 	//Open Site and closed unwanted model
 	public void openWhatsapp() {
@@ -41,11 +41,11 @@ public class WhatsappPanel {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 		try {
-		    WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Continue']")));
-		    continueButton.click();
-		    System.out.println("Clicked on Continue button");
+			WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Continue']")));
+			continueButton.click();
+			System.out.println("Clicked on Continue button");
 		} catch (TimeoutException e) {
-		    System.out.println("Element not found within timeout: " + e.getMessage());
+			System.out.println("Element not found within timeout: " + e.getMessage());
 		}
 	}
 
@@ -73,7 +73,7 @@ public class WhatsappPanel {
 				System.out.println("Available");
 				driver.findElement(By.xpath("(//div[@class='x10l6tqk xh8yej3 x1g42fcv'])[1]")).click();
 				Thread.sleep(2000);	
-				
+
 				return true;
 			}
 			else {
@@ -85,49 +85,58 @@ public class WhatsappPanel {
 			return false;
 		}
 	}
+	
+	public String userName() {
+		//find person name in chat 
+		String getUserName = driver.findElement(By.xpath("(//div[@class='x78zum5 x1cy8zhl x1y332i5 xggjnk3 x1yc453h']/div/div/div/span)[1]")).getText();
+		return getUserName;
+	}
 
 	public String  readMessage() {
 
-			try {
-				//find person name in chat 
-				String getUserName = driver.findElement(By.xpath("(//div[@class='x78zum5 x1cy8zhl x1y332i5 xggjnk3 x1yc453h']/div/div/div/span)[1]")).getText();
-				userID = getUserName;
-				
-				List<WebElement> messages = driver.findElements(By.cssSelector("div.message-in"));  
+		try {
 
-				currentLastMessage = messages.get(messages.size() - 1).getText();
-				System.out.println("Last message: " + currentLastMessage);
-				WebElement lastMessage = messages.get(messages.size() - 1);
+			List<WebElement> messages = driver.findElements(By.cssSelector("div.message-in"));  
 
-				// Clean the text (remove timestamp)
-				String messageText = lastMessage.getText();
-				messageText = messageText.replaceAll("\\d{1,2}:\\d{2}\\s?(AM|PM)?", "").trim();
+			do{
+				if (!messages.isEmpty()) {
+					currentLastMessage = messages.get(messages.size() - 1).getText();
+					break;
+				} 
+			}while(true);
 
-				System.out.println("Received Message: " + messageText);
+			System.out.println("Last message: " + currentLastMessage);
+			WebElement lastMessage = messages.get(messages.size() - 1);
 
-				System.out.println("Message Reading");
+			// Clean the text (remove timestamp)
+			String messageText = lastMessage.getText();
+			messageText = messageText.replaceAll("\\d{1,2}:\\d{2}\\s?(AM|PM)?", "").trim();
 
-				return messageText;
+			System.out.println("Received Message: " + messageText);
 
-			}catch(NoSuchElementException e) {
-				System.out.println("Element not fond in Message reading"+ e.getMessage());
-				return "null";
-			}
+			System.out.println("Message Reading");
+
+			return messageText;
+
+		}catch(NoSuchElementException e) {
+			System.out.println("Element not fond in Message reading"+ e.getMessage());
+			return "null";
+		}
 	}
 
-	public String generateReply(String messageText) {
-		   
+	public String generateReply(String userID, String messageText) {
+
 		try {
 			ReplyFunctions ChatGPTReply = new ReplyFunctions();	
 			shotreplyFunction shotGenerate = new shotreplyFunction();
-			
+
 			String sendShot = shotGenerate.generateReply(userID, messageText);
 			if(sendShot.equals("Not available")) {
 				String Send = ChatGPTReply.generateReply(userID , messageText);
-				
+
 				sendShot = Send;
 			};
-		
+
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			System.out.println("Response -"+sendShot);
 			return sendShot;
@@ -143,16 +152,45 @@ public class WhatsappPanel {
 			Thread.sleep(200);
 			driver.findElement(By.xpath("//div[@aria-label='Type a message']")).sendKeys(replyText);
 			Thread.sleep(500);
-
-			Robot  Keyboard = new Robot();
-			Keyboard.keyPress(KeyEvent.VK_ENTER);
-			Keyboard.keyRelease(KeyEvent.VK_ENTER);
+			try {
+				// Try Robot ENTER key first
+				Robot keyboard = new Robot();
+				keyboard.keyPress(KeyEvent.VK_ENTER);
+				keyboard.keyRelease(KeyEvent.VK_ENTER);
+				System.out.println("Clicked using Robot ENTER key");
+			} catch (AWTException e) {
+				System.out.println("Robot failed, trying XPath click: " + e.getMessage());
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+					WebElement sendButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-icon='wds-ic-send-filled']")));
+					sendButton.click();
+					System.out.println("Clicked using XPath");
+				} catch (TimeoutException | NoSuchElementException ex) {
+					System.out.println("Both Robot and XPath click failed: " + ex.getMessage());
+				}
+			}
 
 			System.out.println("Reply sent");
 		}catch(NoSuchElementException e) {
 			System.out.println("Element not fond reply sent"+ e.getMessage());
 		}
 	}
+
+	public void SendImage() throws InterruptedException, AWTException {
+		
+		driver.findElement(By.xpath("//div[@aria-label='Type a message']")).click();
+		Thread.sleep(100);
+		Robot keyboard = new Robot();
+		keyboard.keyPress(KeyEvent.VK_CONTROL);
+		keyboard.keyPress(KeyEvent.VK_V);
+		keyboard.keyRelease(KeyEvent.VK_V);
+		keyboard.keyRelease(KeyEvent.VK_CONTROL);
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//div[@aria-label='Add a caption']")).sendKeys("Ready");
+		keyboard.keyPress(KeyEvent.VK_ENTER);
+		keyboard.keyRelease(KeyEvent.VK_ENTER);
+	}
+
 
 	public void logOutWhatsapp() throws InterruptedException {
 		Thread.sleep(200);

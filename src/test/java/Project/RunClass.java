@@ -1,6 +1,8 @@
 package Project;
 
 import java.awt.AWTException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class RunClass {
 
@@ -8,6 +10,7 @@ public class RunClass {
 	static String lastMessage = "null";
 	static int Count;
 	static Boolean onChatMessage;
+	static String storeCameraImageName ;
 	public static void main(String[] args) throws InterruptedException, AWTException {
 		
 		WhatsappPanel Help = new WhatsappPanel();
@@ -15,7 +18,7 @@ public class RunClass {
 		do { 
 			Help.unReadChatList();
 			Boolean chatsAvilibility = Help.OpenChat();
-			System.out.println("Open Chats");
+			System.out.println(" Open Chats ");
 			  
 			String getMessage = Help.readMessage();
 			if(lastMessage.equals("null")){
@@ -30,6 +33,8 @@ public class RunClass {
 			
 			if(chatsAvilibility == true || onChatMessage == true) {
 				do {	
+					
+					String userId = Help.userName();
 					String currentLastMessage = Help.readMessage();
 
 					if(!currentLastMessage.equals(lastMessage)) {
@@ -37,8 +42,26 @@ public class RunClass {
 
 						if("Logout".equals(lastMessage)){
 							break;
+						}else if("Send Your Photo".equals(lastMessage)) {
+							System.out.println("Camera is open");
+							Help.sendReply("wait I am capturing the photo");
+							
+							LocalDateTime now = LocalDateTime.now();
+					        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH_mm_ss");
+					        String formattedTime = now.format(formatter);
+					        storeCameraImageName = formattedTime;
+					        
+							 CameraCapture image = new CameraCapture();
+
+							 image.Capture(storeCameraImageName);
+							 image.copyImage(storeCameraImageName);
+							 Help.sendReply("Your Image is ready");
+							 Thread.sleep(500);
+							 
+							 Help.SendImage();
 						}
-						String Send = Help.generateReply(currentLastMessage);
+						
+						String Send = Help.generateReply(userId, currentLastMessage);
 						Help.sendReply(Send);
 						Count = 0;
 
@@ -59,6 +82,8 @@ public class RunClass {
 				break;
 			}
 		}while(true);
+		
+		
 		
 		Help.logOutWhatsapp();
 	}

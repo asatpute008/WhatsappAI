@@ -23,28 +23,31 @@ public class ReplyFunctions {
 	private static final String API_KEY = "AIzaSyBLYZ8s6OZcQNecTqRdNBXAhlMcG9vBPZc";
 
 	public static String generateReply(String userId, String recMessage) {
-		String responseText = "";
+		String responseText = recMessage;
         
 		StoreChatHistory ChatHistory = new StoreChatHistory();
 		
 
 		
 		//check if need more information
-		String[] byeMessages = {"info", "plan", "joke", "place", "bore", "jaga", "means", "kay aahe", "list", "tour"};
-		
-		
-		if (Arrays.stream(byeMessages).anyMatch(responseText.toLowerCase()::contains)) {
+		String[] byeMessages = {"info","information","details","mahiti","mhantat", "write","plan", "joke", "funny", "place", "bore", "jaga", "means", "kay aahe", "list", "tour"};
+
+		String lowerCaseResponse = responseText.toLowerCase();
+
+		if (Arrays.stream(byeMessages).anyMatch(lowerCaseResponse::contains)) {
 		    replyType = false;
 		} else {
-			 replyType = true;
+		    replyType = true;
 		}
 		 
 		if(replyType == true) {
+			System.out.println("Print Shot message");
 		generateSentiment  generatPrompt = new generateSentiment();
 		String getuserMessage = generatPrompt.createPrompt(userId, recMessage);
 		userMessage = getuserMessage;
 		System.out.println("gemini prompt: "+ userMessage);
 		}else {
+			System.out.println("Print long message");
 			userMessage = recMessage;
 		}
 		
@@ -110,7 +113,7 @@ public class ReplyFunctions {
 
 	public static void main(String[] args) {
 
-		String reply = generateReply("Ani jio","kuthe jaun");
+		String reply = generateReply("Ani jio","Himachal ki information batao");
 		System.out.println("Gemini Response: " + reply);
 	}
 }
