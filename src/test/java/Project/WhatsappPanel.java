@@ -190,7 +190,11 @@ public class WhatsappPanel {
 		keyboard.keyPress(KeyEvent.VK_ENTER);
 		keyboard.keyRelease(KeyEvent.VK_ENTER);
 	}
-
+	
+	public void closedWindow()
+	{
+		driver.quit();
+	}
 
 	public void logOutWhatsapp() throws InterruptedException {
 		Thread.sleep(200);

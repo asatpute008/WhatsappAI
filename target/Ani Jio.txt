@@ -1,0 +1,5 @@
+
+You: JelloThat depends on the context!  To give you a good reply, I need more information.  "Jello" could be:
+
+* **A statement of fact:**  "I'm having Jello for dessert."  Reply: "Sounds delicious!" or "What flavor?"
+* **A question:** "Jello?" (implying "Do you want Jello?") Reply: "Yes, please!" or "No, than
