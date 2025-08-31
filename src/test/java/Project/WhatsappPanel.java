@@ -18,10 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WhatsappPanel {
 
 	WebDriver driver;
-	public WhatsappPanel(WebDriver Rdriver) {
-		this.driver =Rdriver;
-	}
-
+	
 	public WhatsappPanel() {
 
 	}
@@ -54,6 +51,8 @@ public class WhatsappPanel {
 
 		try {
 			Thread.sleep(500);
+			driver.findElement(By.xpath("//div[text()='Groups']")).click();
+			Thread.sleep(500);
 			driver.findElement(By.xpath("//div[text()='Favourites']")).click();
 			Thread.sleep(500);
 			driver.findElement(By.xpath("//div[text()='Unread']")).click();
@@ -62,6 +61,25 @@ public class WhatsappPanel {
 		}catch(NoSuchElementException e) {
 			System.out.println("Element not fond in UnreadChatlist"+ e.getMessage());
 		}
+	}
+	 
+	public Boolean AvailableChats() throws InterruptedException {
+		try {
+			Thread.sleep(2000);		
+			List<WebElement> NewChat = driver.findElements(By.xpath("//div[@class='x10l6tqk xh8yej3 x1g42fcv']/div/div/div/div[2]/div[2]/div[2]/span/div"));
+
+			if (NewChat.size() > 0) {
+				System.out.println("Available");
+				Thread.sleep(2000);	
+
+				return true;
+			}
+			else {
+				return false;
+			}}catch(NoSuchElementException e) {
+				System.out.println("Element not fond in Chat list"+ e.getMessage());
+				return false;
+			}
 	}
 
 	public Boolean OpenChat() throws InterruptedException {
@@ -99,7 +117,7 @@ public class WhatsappPanel {
 			List<WebElement> messages = driver.findElements(By.cssSelector("div.message-in"));  
 
 			do{
-				if (!messages.isEmpty()) {
+				if (!messages.isEmpty() || messages.size() != 0) {
 					currentLastMessage = messages.get(messages.size() - 1).getText();
 					break;
 				} 
@@ -127,19 +145,22 @@ public class WhatsappPanel {
 	public String generateReply(String userID, String messageText) {
 
 		try {
+			String returnValue;
 			ReplyFunctions ChatGPTReply = new ReplyFunctions();	
 			shotreplyFunction shotGenerate = new shotreplyFunction();
 
 			String sendShot = shotGenerate.generateReply(userID, messageText);
+			returnValue =  sendShot;
+			
 			if(sendShot.equals("Not available")) {
 				String Send = ChatGPTReply.generateReply(userID , messageText);
-
-				sendShot = Send;
+				System.out.println("Response long -"+Send);
+				returnValue = Send;
 			};
 
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			System.out.println("Response -"+sendShot);
-			return sendShot;
+			System.out.println("Response shot -"+sendShot);
+			return returnValue;
 		}catch(NoSuchElementException e) {
 			System.out.println("Element not fond in Response generation"+ e.getMessage());
 
@@ -150,7 +171,7 @@ public class WhatsappPanel {
 	public void sendReply(String replyText) throws InterruptedException, AWTException {
 		try {
 			Thread.sleep(200);
-			driver.findElement(By.xpath("//div[@aria-label='Type a message']")).sendKeys(replyText);
+			driver.findElement(By.xpath("//div[@aria-placeholder='Type a message']")).sendKeys(replyText);
 			Thread.sleep(500);
 			try {
 				// Try Robot ENTER key first
@@ -178,7 +199,7 @@ public class WhatsappPanel {
 
 	public void SendImage() throws InterruptedException, AWTException {
 		
-		driver.findElement(By.xpath("//div[@aria-label='Type a message']")).click();
+		driver.findElement(By.xpath("//div[@aria-placeholder='Type a message']")).click();
 		Thread.sleep(100);
 		Robot keyboard = new Robot();
 		keyboard.keyPress(KeyEvent.VK_CONTROL);

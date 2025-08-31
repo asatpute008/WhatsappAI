@@ -20,14 +20,12 @@ public class ReplyFunctions {
 	static String userMessage;
 	
 	// Replace with your Gemini API Key
-	private static final String API_KEY = "AIzaSyCZ1r9I-Jm5lld6rSlFC3HQ4nxWo9fDuUU";
+	private static final String API_KEY = "AIzaSyB51WjwuwfbNTKKdYvUHuhmZjH9UENteuo";
 
 	public static String generateReply(String userId, String recMessage) {
 		String responseText = recMessage;
         
 		StoreChatHistory ChatHistory = new StoreChatHistory();
-		
-
 		
 		//check if need more information
 		String[] byeMessages = {"info","information","details","mahiti","mhantat", "write","plan", "joke", "funny", "place", "bore", "jaga", "means", "kay aahe", "list", "tour"};
@@ -110,6 +108,10 @@ public class ReplyFunctions {
 			return responseText;
 		}
 	       }
+	
+	public void generateOrderReply() {
+		
+	}
 
 	public static void main(String[] args) {
 

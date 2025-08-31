@@ -20,10 +20,6 @@ public class openWhatsapp {
 	String userID;
 	int nextChat = 0;
 
-	public openWhatsapp(WebDriver Rdriver) {
-		this.driver =Rdriver;
-	}
-
 	public openWhatsapp() {
 
 	}
@@ -55,7 +51,7 @@ public class openWhatsapp {
 			Thread.sleep(500);
 			driver.findElement(By.xpath("//div[text()='Unread']")).click();
 
-			openWhatsapp Avail = new openWhatsapp(driver);
+			openWhatsapp Avail = new openWhatsapp();
 			Arya = Avail.ChatAvailibility();
 			System.out.println("Final Execution: "+Arya);
 		}while(!" LogOut".equals(Arya));
@@ -77,7 +73,7 @@ public class openWhatsapp {
 			String getUserName = driver.findElement(By.xpath("(//div[@class='x78zum5 x1cy8zhl x1y332i5 xggjnk3 x1yc453h']/div/div/div/span)[1]")).getText();
 			userID = getUserName;
 			
-			openWhatsapp reply = new openWhatsapp(driver);
+			openWhatsapp reply = new openWhatsapp();
 			String ValueForArya = reply.replyMessage();
 			System.out.println("Exit chat");
 			
