@@ -39,7 +39,7 @@ public class StoreChatHistory {
 //		  if(Sheet.checkFileExists(userID) == false) {
 //			  Sheet.createCustomerOrderFile(userID);
 //		  }
-		     String data =  "\nitem -" + Message;
+		     String data =   Message +" ";
 		try {
 			FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt", true); // true = append mode
 			writer.write(data);
@@ -51,12 +51,10 @@ public class StoreChatHistory {
 	}
 	
   public void createCustomerOrderFile(String fileName) {
-	     String data =  "Your Order is: \n";
+
 			try {
 				FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" +fileName + ".txt", true); // true = append mode
-				writer.write(data);
-				writer.close();
-//System.out.println("Recived message appended successfully to " + userID + ".txt");
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -117,7 +115,7 @@ public class StoreChatHistory {
 			}
 
 			for (String l : lines) {
-				returnvalue = returnvalue +" \n" + l;
+				returnvalue = returnvalue +" " + l;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -277,12 +275,13 @@ public class StoreChatHistory {
 //		Help.copyImage();
 //		Help.creatOrderList();
 //		Help.addNewItem("Veg-Roll");
-		List<String> list =Help.getItemList();
-		System.out.println(list);
+//		List<String> list =Help.getItemList();
+//		System.out.println(list);
 //		Help.CustomerList();
 //		Help.addCustomerOrderDetails("101", "2025-08-31", "Order_Aniket","\"vada-Pav,Pizza\"");
 		
 //		Help.getCustomerOrderDetails("102");
+//		Help.createCustomerOrderFile("Test");
 		
 	}
 }

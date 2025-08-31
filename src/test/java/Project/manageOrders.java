@@ -18,7 +18,7 @@ public class manageOrders {
     static String userOrder;
     
 	public String reply(String userName, String currentLastMessage) throws IOException, InterruptedException, AWTException {
-		String returnValue = null;
+		String returnValue = "Please select Other Option";
 		userOrder = "Order_"+userName;
 		boolean itemAvailibility = false;
 		
@@ -44,12 +44,12 @@ public class manageOrders {
 		}else if(itemAvailibility==true){
 			String Response = order.generateResponse(userOrder, currentLastMessage);
 			System.out.println("item is available:" + Response);
-			returnValue = Response;
+			returnValue = "Your Food is"+Response;
 		}else if("Yes".equals(currentLastMessage)){
 			
 			//current date and time 
 			DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH_mm_ss");
+			DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HHmmss");
 			String Date = now.format(formatterDate);
 			String Time = now.format(formatterTime);
 			
@@ -82,6 +82,7 @@ public class manageOrders {
 		return returnValue;
 		
 	}
+	
 	
 	public String  ConfirmOrder(String orderId) {	
 		List<String> orderDetails = Sheet.getCustomerOrderDetails(orderId);
