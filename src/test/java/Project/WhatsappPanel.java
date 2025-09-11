@@ -70,11 +70,9 @@ public class WhatsappPanel {
 
 			if (NewChat.size() > 0) {
 				System.out.println("Available");
-				Thread.sleep(2000);	
-
+				Thread.sleep(1000);	
 				return true;
-			}
-			else {
+			}else {
 				return false;
 			}}catch(NoSuchElementException e) {
 				System.out.println("Element not fond in Chat list"+ e.getMessage());
@@ -88,7 +86,6 @@ public class WhatsappPanel {
 			List<WebElement> NewChat = driver.findElements(By.xpath("//div[@class='x10l6tqk xh8yej3 x1g42fcv']/div/div/div/div[2]/div[2]/div[2]/span/div"));
 
 			if (NewChat.size() > 0) {
-				System.out.println("Available");
 				driver.findElement(By.xpath("(//div[@class='x10l6tqk xh8yej3 x1g42fcv'])[1]")).click();
 				Thread.sleep(2000);	
 
@@ -153,6 +150,7 @@ public class WhatsappPanel {
 			returnValue =  sendShot;
 			
 			if(sendShot.equals("Not available")) {
+				@SuppressWarnings("static-access")
 				String Send = ChatGPTReply.generateReply(userID , messageText);
 				System.out.println("Response long -"+Send);
 				returnValue = Send;

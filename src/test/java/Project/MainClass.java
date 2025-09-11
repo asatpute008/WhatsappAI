@@ -2,6 +2,8 @@ package Project;
 
 import javax.swing.JFrame;
 
+import RunFile.AryaRoboPanel;
+
 public class MainClass {
 
 
