@@ -47,7 +47,7 @@ public class AryaRoboPanel extends JPanel{
      // Header Panel (for title + description)
         JPanel headerPanel = new JPanel();
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
-        headerPanel.setBackground(new Color(245, 245, 245));
+        headerPanel.setBackground(new Color(202, 220, 174));
         
      // Title Label
         JLabel titleLabel = new JLabel("ARYA", SwingConstants.CENTER);
@@ -79,7 +79,7 @@ public class AryaRoboPanel extends JPanel{
                 BorderFactory.createLineBorder(new Color(200, 200, 200), 1, true)
         ));
 
-        JButton startButton = createStyledButton("Start WhatsApp Chats", "src\\test\\resources\\icons\\whatsapp.png", new Color(66, 133, 244));
+        JButton startButton = createStyledButton("Start WhatsApp Chats", "src\\test\\resources\\icons\\whatsapp.png", new Color(237, 163, 90));
         startButton.addActionListener(e -> {
             try {
                 main.ExecuteWhatsappChats();
@@ -88,7 +88,7 @@ public class AryaRoboPanel extends JPanel{
             }
         });
 
-        JButton orderButton = createStyledButton("Manage Online Orders", "src\\test\\resources\\icons\\shopping-bag.png", new Color(255, 152, 0));
+        JButton orderButton = createStyledButton("Manage Online Orders", "src\\test\\resources\\icons\\shopping-bag.png", new Color(237, 163, 90));
         orderButton.addActionListener(e -> {
             try {
                 main1.ExecuteOrdermManage();
@@ -97,21 +97,47 @@ public class AryaRoboPanel extends JPanel{
             }
         });
 
-        buttonPanel.add(startButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        buttonPanel.add(orderButton);
+        
+     // ================== CENTER PANEL (Image + Buttons in one row) ==================
+        JPanel centerWrapper = new JPanel(new BorderLayout(20, 0)); // gap between left/right
+        centerWrapper.setBackground(new Color(225, 233, 201));
 
-        JPanel centerWrapper = new JPanel(new GridBagLayout());
-        centerWrapper.setBackground(new Color(255,248,220));
-        centerWrapper.add(buttonPanel);
+        // 🔹 Left: Image logo
+        try {
+            ImageIcon icon = new ImageIcon("src\\test\\resources\\icons\\robo2.png");
+            Image scaledImg = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            JLabel imageLabel = new JLabel(new ImageIcon(scaledImg));
+            imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            imageLabel.setVerticalAlignment(SwingConstants.CENTER);
+            imageLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+            centerWrapper.add(imageLabel, BorderLayout.CENTER);
+        } catch (Exception e) {
+            System.out.println("⚠️ Could not load logo image");
+        }
 
+                
+     // 🔹 Right: Buttons stacked vertically (already created above)
+        JPanel buttonWrapper = new JPanel();
+        buttonWrapper.setLayout(new BoxLayout(buttonWrapper, BoxLayout.Y_AXIS));
+        buttonWrapper.setBackground(new Color(225, 233, 201));
+        
+        buttonWrapper.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 80)); 
+        buttonWrapper.add(Box.createRigidArea(new Dimension(0, 40))); // spacing
+        buttonWrapper.add(startButton);
+        buttonWrapper.add(Box.createRigidArea(new Dimension(0, 20))); // spacing
+        buttonWrapper.add(orderButton);
+
+        centerWrapper.add(buttonWrapper, BorderLayout.AFTER_LINE_ENDS);
+
+        // Add final center panel
         add(centerWrapper, BorderLayout.CENTER);
+        
 
         // 🔹 File List Section
         JPanel filePanel = new JPanel();
-        filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.Y_AXIS));
-        filePanel.setBackground(new Color(255,248,220));
-        filePanel.setBorder(BorderFactory.createTitledBorder("Available Files"));
+        filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.PAGE_AXIS));
+        filePanel.setBackground(new Color(225, 233, 201));
+        filePanel.setBorder(BorderFactory.createTitledBorder("Whatsapp Chats File"));
 
         loadFileList(filePanel);
 
@@ -136,8 +162,8 @@ public class AryaRoboPanel extends JPanel{
                 if (f.isFile()) {
                     JPanel fileRow = new JPanel(new BorderLayout());
                     fileRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-                    fileRow.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(220, 220, 220)));
-                    fileRow.setBackground(Color.WHITE);
+                    fileRow.setBorder(BorderFactory.createMatteBorder(0, 2, 2, 0, new Color(29, 22, 22)));
+                    fileRow.setBackground(Color(250, 253, 214));
 
                     JLabel fileLabel = new JLabel("📄 " + f.getName());
                     fileLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -147,7 +173,7 @@ public class AryaRoboPanel extends JPanel{
                     JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
                     actionPanel.setOpaque(false);
 
-                    JButton downloadBtn = createStyledSmallButton("Download", new Color(76, 175, 80));
+                    JButton downloadBtn = createStyledSmallButton("Download", new Color(100, 127, 188));
                     downloadBtn.addActionListener(e -> {
                         try {
                             Desktop.getDesktop().open(f);
@@ -157,7 +183,7 @@ public class AryaRoboPanel extends JPanel{
                         }
                     });
 
-                    JButton deleteBtn = createStyledSmallButton("Delete", new Color(244, 67, 54));
+                    JButton deleteBtn = createStyledSmallButton("Delete", new Color(128, 0, 0));
                     deleteBtn.addActionListener(e -> {
                         int confirm = JOptionPane.showConfirmDialog(this,
                                 "Are you sure you want to delete " + f.getName() + "?",
