@@ -22,7 +22,7 @@ public class StoreChatHistory {
 	static StoreChatHistory Sheet = new StoreChatHistory();
 	
 	public void storeRecivedMessage(String userID, String Message) {
-		String data = "\nYou: "+ Message;
+		String data = "\nUser: "+ Message;
 
 		try {
 			FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt", true); // true = append mode
@@ -61,7 +61,7 @@ public class StoreChatHistory {
   }
 
 	public void storeReplyMessage(String userID, String Message) {
-		String data = "\nMe: "+ Message;
+		String data = "\nRobo: "+ Message;
 
 		try {
 			FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt", true); // true = append mode
@@ -125,6 +125,25 @@ public class StoreChatHistory {
 		return returnvalue;
 	}
 
+	public String readFileLastLine(String userID) {
+	    String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt";
+	    String lastLine = null;
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+	        String line;
+	        int lineValue = 0;
+	        while ((line = reader.readLine()) != null ) {
+	            lastLine = line; // keep overwriting until the last line
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+	    return lastLine;
+	}
+	
+
 	public boolean checkFileExists(String userID) {
 		File file = new File("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt");
 		return file.exists() && file.isFile(); // Ensures it's a file, not directory
@@ -145,7 +164,7 @@ public class StoreChatHistory {
 	}
 	
 	public void CustomerList() {
-		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\customerList.csv";
+		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\customerList.csv";
 
         // Updated CSV Header
         String header = "OrderId,Date,FileName, OrderDetails";
@@ -159,7 +178,7 @@ public class StoreChatHistory {
 	}
 	
 	public void addCustomerOrderDetails(String OrderId, String Date, String FileName, String OrderDetails) {
-		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\customerList.csv";
+		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\customerList.csv";
              System.out.println("Order Details: "+ OrderDetails);
         // Updated CSV Header
 		 String orderDetailsRow = "\n" + OrderId + "," + Date + "," + FileName + "," + OrderDetails;
@@ -173,7 +192,7 @@ public class StoreChatHistory {
 	}
 	
 	public List<String> getCustomerOrderDetails(String orderId) {
-		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\customerList.csv";
+		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\customerList.csv";
 		  List<String> returnValues = new ArrayList<>();
 		try {
 			
@@ -203,7 +222,7 @@ public class StoreChatHistory {
 	}
 	
 	public void addNewItem(String itemName) {
-		 String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\menuList.csv";
+		 String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\menuList.csv";
 	        String menuItem = itemName;
 	        int stock = 0;
 
@@ -239,7 +258,7 @@ public class StoreChatHistory {
      
 	public List<String> getItemList() throws IOException {
 
-        String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\menuList.csv";
+        String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\menuList.csv";
 
         List<String> menuItems = new ArrayList<>();
 
@@ -282,6 +301,8 @@ public class StoreChatHistory {
 		
 //		Help.getCustomerOrderDetails("102");
 //		Help.createCustomerOrderFile("Test");
+		
+		System.out.println("Last Line"+Help.readFileLastLine("Boss"));
 		
 	}
 }

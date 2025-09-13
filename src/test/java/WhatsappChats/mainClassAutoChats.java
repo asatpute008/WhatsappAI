@@ -1,14 +1,32 @@
 package WhatsappChats;
 
+import java.awt.AWTException;
+
+import org.openqa.selenium.WebDriver;
+
+import Project.StoreChatHistory;
 import Project.WhatsappPanel;
 
 public class mainClassAutoChats {
+	static WebDriver Idriver;
+	public mainClassAutoChats(WebDriver Rdriver) {
+		Idriver = Rdriver;
+	}
 
+	public mainClassAutoChats() {
 
-	@SuppressWarnings("unused")
-	public void ExecuteWhatsappChats() throws InterruptedException {
+	}
 
-		WhatsappPanel whatsapp = new  WhatsappPanel();
+	static WhatsappPanel whatsapp = new  WhatsappPanel(Idriver);
+	static replyGenerator response = new replyGenerator(whatsapp.driver);
+	static mainClassAutoChats main = new mainClassAutoChats();
+	static StoreChatHistory chat = new StoreChatHistory();
+
+	String oldMessage = "null" ;
+
+	@SuppressWarnings({ "unused", "null" })
+	public void ExecuteWhatsappChats() throws InterruptedException, AWTException {
+
 		whatsapp.openWhatsapp();
 
 		Outerloop:do {
@@ -16,27 +34,24 @@ public class mainClassAutoChats {
 			System.out.println("Unread Chat Open -");
 
 			unreadchatloop:do {
-				boolean presentChatMessageAvailavble = false;
-				boolean unReadChatAvailibility = whatsapp.AvailableChats();
-				int newMessageValue = 0;
+				boolean presentChatMessageAvailavble = main.verifyMessage();
+				boolean unReadChatAvailibility = whatsapp.AvailableChats();				
 
 				if(presentChatMessageAvailavble == true) {
 					System.out.println("Current Chat Message Available");
-					
-				}else if(unReadChatAvailibility  == true) {
-					whatsapp.OpenChat();
-					
-					newMessageLoop:do {
-						newMessageValue++;
-						System.out.println("New Message Available - "+ newMessageValue);
-						Thread.sleep(1000);
-					}while(newMessageValue < 10);
+					main.readAndsend();
 					break unreadchatloop;
-					
+
+				}else if(unReadChatAvailibility  == true) {
+					System.out.println("New Chat Message Available");
+					whatsapp.OpenChat();
+					main.readAndsend();
+					break unreadchatloop;
+
 				}else {
 					System.out.println("Unread Chats Not Available");
 					break unreadchatloop;
-					
+
 				}
 
 			}while(true);
@@ -44,4 +59,47 @@ public class mainClassAutoChats {
 		}while(true);
 	}
 
+
+	@SuppressWarnings("unused")
+	public boolean verifyMessage() {
+		System.out.println("Check verifyMessage - 1");
+		boolean returnValue = false;
+		if(!oldMessage.equals("null")){	
+			String newMessage = whatsapp.readMessage();
+			if(!oldMessage.equals(newMessage)) {
+				returnValue = true;
+			}
+		}else {
+			returnValue = false;
+		}
+		return returnValue;
+	}
+	public void generateResponse() {
+	}
+
+	@SuppressWarnings("unused")
+	public void readAndsend() throws InterruptedException, AWTException {
+		int newMessageValue = 0;
+
+		newMessageLoop:do {
+			newMessageValue++;
+			System.out.println("New Message Available - "+ newMessageValue);
+			String newMessage = whatsapp.readMessage();
+
+			if(!oldMessage.equals(newMessage)) {
+				oldMessage = newMessage;
+				String userName = whatsapp.userName();
+				String replyGenerate = response.generateReply(userName, newMessage);			
+				whatsapp.sendReply(replyGenerate);
+				newMessageValue = 0;
+			}
+
+			Thread.sleep(2000);
+
+		}while(newMessageValue < 10);
+	}
+
+	//	public static void main(String[] args) throws InterruptedException, AWTException {
+	//		main.ExecuteWhatsappChats();
+	//	}
 }

@@ -1,0 +1,85 @@
+
+
+You: Kay karat aaheThe reply to "Kay karat aahe?" (What are you doing?) depends on what you're actually doing.  Here are a few options:
+
+* **मी काहीही नाही करत आहे. (Mee kaahii nahi karat aahe.)** - I'm not doing anything.
+* **मी [क्रियापद] करत आहे. (Mee [kriyaapad] karat aahe.)** - I am [verb]ing.  (Replace "[kriyaap
+You: Kay zala
+Me: बरं झालं. (Baran zhalan.)  /  सर्व ठीक आहे. (Sarv thik aahe.)
+
+You: Arra bol n mazya shi
+Me: बोलतोय ना! (Boltoy na!)
+Ek aadmi doctor ke paas gaya aur bola, "Doctor saab, mujhe har waqt neend aa rahi hai."
+
+Doctor ne kaha, "Aapko kitni neend aa rahi hai?"
+
+Aadmi ne kaha, "Itni ki main subah uthne ke liye alarm set kar deta hu, aur alarm bajne se pehle hi so jaata hu!"
+
+You: Or ek
+Me: ओके, सांग. (Okay, tell.)
+
+Me: Ek aadmi doctor ke paas gaya aur bola, "Doctor saab, mujhe har cheez double dikhti hai!"
+
+Doctor ne kaha, "Aap to bilkul theek ho, aapke paas to do doctor hai!"
+
+You: Arre
+Me: अरे काय? (Are kay?)
+
+You: Mala sang girlfriend kasa patau
+Me: स्वतःला असल्याप्रमाणे दाखव आणि तिच्याशी प्रामाणिकपणे बोला. (Svatahala asalyapramanhe dakhav ani tichya she pramanikapane bola.)
+
+You: Mala ek multi aavadte
+Me: ती कोणती? (Tee konti?)  Which one?
+
+You: Mazi friend aahe ti IIM madhe aahe
+Me: Wow, that's impressive!
+
+You: Tila prapose maraycha aahe
+Me: Kashi plan aahe? (What's the plan?)
+
+Me: maf karsha, tumhi konta plan viichit aahat te mala mahit nahi. krupaya tumcha plan vishayil adhik mahiti dya.
+You: Kam hota ek
+Me: मग काय झाले ते सांग ना! (Mag kay jhale te sang na!)  (So tell me what happened then!)
+
+You: Mala ek multi aawadte
+Me: आणि ती तुम्हाला कशी आवडते? (Ani ti tumhala kashi aavadte?)  (And how do you like her?)
+
+You: Te mazi friend aahe me premium karte
+Me: Premium karte?  Mhanje? (Premium karte?  Means?)
+
+You: Love
+Me: Tya premium karte madhe 'love' kay asel? (What is 'love' in that premium relationship?)
+
+You: Arre I love her
+Me: Mala khup khush vatale! (I'm very happy for you!)
+
+You: Mala prapose maraycha aahe
+Me: Mag kay plan aahe? (So what's the plan?)
+
+Me: mala tumchya plan baddal adhik mahiti pahil nahi, teva plan sanga shokat nahi. tumhi mala planachi vishay mahiti sangitli tar mi tumhala ek plan sanga shakto.
+User: Kaise ho
+Robo: "Kaise ho?  Acha hun, tuzya planachi mahiti sagli sangli ka?" (How are you? I'm good, did you tell me everything about your plan?)
+
+User: Mala aata ek kam aahe
+Robo: Okay, bol na mala kaay aahe te? (Okay, tell me what it is?)
+
+User: Tushar kay karat aahe aata
+Robo: Tushar?  Mala mahit nahi, kay karat aahe te.
+(Tushar? I don't know what he's doing.)
+
+Robo: Ek aadmi doctor ke paas gaya aur bola, "Doctor sahab, mujhe har waqt neend aa rahi hai."
+
+Doctor ne kaha, "Kya aap raat mein kafi der tak jagte hain?"
+
+Aadmi ne kaha, "Nahi sahab, main to sote hi rehta hun."
+
+User: Kya aap mera kam karoge
+Robo: Hmm, kaay kam aahe te sang na pahilya? (Hmm, tell me what the work is first?)
+
+User: How much country  in world
+User: Earth  par  kitne desh  hai
+Robo: Arey,  duniya mein kitne desh hain, yeh toh mujhe bhi nahi pata!  Google karke dekhte hain?
+(Hey, I don't know how many countries are in the world either! Let's check on Google?)
+
+User: Arre tu sang
+User: What

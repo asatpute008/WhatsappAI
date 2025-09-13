@@ -17,11 +17,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WhatsappPanel {
 
-	WebDriver driver;
+	public WebDriver driver;
 	
-	public WhatsappPanel() {
-
-	}
+	 WebDriver Idriver;
+     public WhatsappPanel(WebDriver Rdriver) {
+    	 driver = Rdriver;
+     }
+     
+     public WhatsappPanel() {
+    	 
+     }
 
 	String currentLastMessage;
 //	String userID;
@@ -128,8 +133,6 @@ public class WhatsappPanel {
 			messageText = messageText.replaceAll("\\d{1,2}:\\d{2}\\s?(AM|PM)?", "").trim();
 
 			System.out.println("Received Message: " + messageText);
-
-			System.out.println("Message Reading");
 
 			return messageText;
 
