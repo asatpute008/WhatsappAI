@@ -23,23 +23,25 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import OrderManage.mainClassOrderManage;
 import WhatsappChats.mainClassAutoChats;
 
 public class AryaRoboPanel extends JPanel{
-
+    
 
     mainClassAutoChats main = new mainClassAutoChats();
     mainClassOrderManage main1 = new mainClassOrderManage();
 
     private static final String FILE_DIR = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target";
-
+    
     public AryaRoboPanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(245, 245, 245));
@@ -96,7 +98,6 @@ public class AryaRoboPanel extends JPanel{
                 ex.printStackTrace();
             }
         });
-
         
      // ================== CENTER PANEL (Image + Buttons in one row) ==================
         JPanel centerWrapper = new JPanel(new BorderLayout(20, 0)); // gap between left/right
@@ -105,7 +106,7 @@ public class AryaRoboPanel extends JPanel{
         // 🔹 Left: Image logo
         try {
             ImageIcon icon = new ImageIcon("src\\test\\resources\\icons\\robo2.png");
-            Image scaledImg = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            Image scaledImg = icon.getImage().getScaledInstance(200, 200, Image.SCALE_AREA_AVERAGING);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImg));
             imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
             imageLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -150,7 +151,8 @@ public class AryaRoboPanel extends JPanel{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+     
+    
 	// Load files dynamically
     private void loadFileList(JPanel filePanel) {
         filePanel.removeAll(); // clear old list
@@ -162,17 +164,22 @@ public class AryaRoboPanel extends JPanel{
                 if (f.isFile()) {
                     JPanel fileRow = new JPanel(new BorderLayout());
                     fileRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-                    fileRow.setBorder(BorderFactory.createMatteBorder(0, 2, 2, 0, new Color(29, 22, 22)));
+                    fileRow.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 3, new Color(128,128,128)));
                     fileRow.setBackground(Color(250, 253, 214));
-
-                    JLabel fileLabel = new JLabel("📄 " + f.getName());
+                    
+                 // load your icon from project resources
+                    ImageIcon icon = new ImageIcon("src/test/resources/icons/file.png");
+                    Image scaled = icon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+                    JLabel fileLabel = new JLabel(f.getName(), new ImageIcon(scaled), JLabel.LEFT);
+                    
                     fileLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
                     fileLabel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 10));
 
                     // Buttons panel
                     JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
                     actionPanel.setOpaque(false);
-
+                    
+                  
                     JButton downloadBtn = createStyledSmallButton("Download", new Color(100, 127, 188));
                     downloadBtn.addActionListener(e -> {
                         try {

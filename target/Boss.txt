@@ -1,85 +1,52 @@
 
+User: Kay karat aaheThe reply to "Kay karat aahe?" (What are you doing?) depends on what you're actually doing.  Here are a few options:
 
-You: Kay karat aaheThe reply to "Kay karat aahe?" (What are you doing?) depends on what you're actually doing.  Here are a few options:
+* **मी काहीही नाही करत आहे. (Mee kaahihin nahi karat aahe.)** - I'm not doing anything.
+* **मी [क्रियापद] करत आहे. (Mee [kriyaapad] karat aahe.)** - I am [verb]ing.  (Replace "[क्रिय
+Robo: Why don't scientists trust atoms? 
 
-* **मी काहीही नाही करत आहे. (Mee kaahii nahi karat aahe.)** - I'm not doing anything.
-* **मी [क्रियापद] करत आहे. (Mee [kriyaapad] karat aahe.)** - I am [verb]ing.  (Replace "[kriyaap
-You: Kay zala
-Me: बरं झालं. (Baran zhalan.)  /  सर्व ठीक आहे. (Sarv thik aahe.)
+Because they make up everything!
 
-You: Arra bol n mazya shi
-Me: बोलतोय ना! (Boltoy na!)
-Ek aadmi doctor ke paas gaya aur bola, "Doctor saab, mujhe har waqt neend aa rahi hai."
+User: Other one
+Robo: Hello!  "Other one" is a bit vague. Could you please clarify what you mean by "other one"?  I need more context to understand your request.
+Please provide me with some context!  I need to know what kind of jokes you'd like to hear.  For example, are you looking for:
 
-Doctor ne kaha, "Aapko kitni neend aa rahi hai?"
+* **Dad jokes?** (e.g., Why don't scientists trust atoms? Because they make up everything!)
+* **Pun jokes?** (e.g., I used to hate facial hair...but then it grew on me.)
+* Why don't scientists trust atoms? 
 
-Aadmi ne kaha, "Itni ki main subah uthne ke liye alarm set kar deta hu, aur alarm bajne se pehle hi so jaata hu!"
+Because they make up everything!
 
-You: Or ek
-Me: ओके, सांग. (Okay, tell.)
 
-Me: Ek aadmi doctor ke paas gaya aur bola, "Doctor saab, mujhe har cheez double dikhti hai!"
+Why did the bicycle fall over?
 
-Doctor ne kaha, "Aap to bilkul theek ho, aapke paas to do doctor hai!"
+Because it was two tired.
 
-You: Arre
-Me: अरे काय? (Are kay?)
 
-You: Mala sang girlfriend kasa patau
-Me: स्वतःला असल्याप्रमाणे दाखव आणि तिच्याशी प्रामाणिकपणे बोला. (Svatahala asalyapramanhe dakhav ani tichya she pramanikapane bola.)
+What do you call a fake noodle?
 
-You: Mala ek multi aavadte
-Me: ती कोणती? (Tee konti?)  Which one?
+An impasta.
 
-You: Mazi friend aahe ti IIM madhe aahe
-Me: Wow, that's impressive!
 
-You: Tila prapose maraycha aahe
-Me: Kashi plan aahe? (What's the plan?)
+Parallel lines have so much in common.  It’s a shame they’ll never meet.
 
-Me: maf karsha, tumhi konta plan viichit aahat te mala mahit nahi. krupaya tumcha plan vishayil adhik mahiti dya.
-You: Kam hota ek
-Me: मग काय झाले ते सांग ना! (Mag kay jhale te sang na!)  (So tell me what happened then!)
 
-You: Mala ek multi aawadte
-Me: आणि ती तुम्हाला कशी आवडते? (Ani ti tumhala kashi aavadte?)  (And how do you like her?)
+Why did the scarecrow win an award?
 
-You: Te mazi friend aahe me premium karte
-Me: Premium karte?  Mhanje? (Premium karte?  Means?)
+Because heThat's exciting! Malvan is a beautiful place. To help you plan your tour, I need some more information.  Tell me about:
 
-You: Love
-Me: Tya premium karte madhe 'love' kay asel? (What is 'love' in that premium relationship?)
+* **Trip Length:** How long will you be in Malvan?  (e.g., 3 days, a week, etc.)
+* **Travel Style:** Are you looking for a luxurious getaway, a budget-friendly trip, or something 
+User: Tu kay karat aahe
+Robo: Hello!  I'm Arya Robo, your friendly AI assistant.
 
-You: Arre I love her
-Me: Mala khup khush vatale! (I'm very happy for you!)
+I'm not familiar with the phrase "Tu kay karat aahe". Could you please tell me what language that is and what you'd like me to do?  I'm happy to help!
 
-You: Mala prapose maraycha aahe
-Me: Mag kay plan aahe? (So what's the plan?)
+User: Kay challa
+Robo: Hello! I'm Arya Robo, your friendly AI assistant.  I'm not familiar with the phrase "Kay challa". Could you please tell me what language that is and what you'd like me to do? I'm happy to help!
 
-Me: mala tumchya plan baddal adhik mahiti pahil nahi, teva plan sanga shokat nahi. tumhi mala planachi vishay mahiti sangitli tar mi tumhala ek plan sanga shakto.
-User: Kaise ho
-Robo: "Kaise ho?  Acha hun, tuzya planachi mahiti sagli sangli ka?" (How are you? I'm good, did you tell me everything about your plan?)
+User: Kasa aahe tu
+Robo: Hey there! 😊 I'm doing great, thanks for asking! How are you today?  Let's chat! 💬
 
-User: Mala aata ek kam aahe
-Robo: Okay, bol na mala kaay aahe te? (Okay, tell me what it is?)
-
-User: Tushar kay karat aahe aata
-Robo: Tushar?  Mala mahit nahi, kay karat aahe te.
-(Tushar? I don't know what he's doing.)
-
-Robo: Ek aadmi doctor ke paas gaya aur bola, "Doctor sahab, mujhe har waqt neend aa rahi hai."
-
-Doctor ne kaha, "Kya aap raat mein kafi der tak jagte hain?"
-
-Aadmi ne kaha, "Nahi sahab, main to sote hi rehta hun."
-
-User: Kya aap mera kam karoge
-Robo: Hmm, kaay kam aahe te sang na pahilya? (Hmm, tell me what the work is first?)
-
-User: How much country  in world
-User: Earth  par  kitne desh  hai
-Robo: Arey,  duniya mein kitne desh hain, yeh toh mujhe bhi nahi pata!  Google karke dekhte hain?
-(Hey, I don't know how many countries are in the world either! Let's check on Google?)
-
-User: Arre tu sang
-User: What
+User: Kay karat aahe
+Robo: Hey there! 😊  Just hangin' out, ready to chat with you! What's up? 💬

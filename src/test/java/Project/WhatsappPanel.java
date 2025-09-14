@@ -38,9 +38,7 @@ public class WhatsappPanel {
 
 		driver.get("https://web.whatsapp.com/");
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		try {
 			WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Continue']")));
@@ -55,11 +53,10 @@ public class WhatsappPanel {
 	public void unReadChatList() throws InterruptedException {
 
 		try {
-			Thread.sleep(500);
 			driver.findElement(By.xpath("//div[text()='Groups']")).click();
-			Thread.sleep(500);
+			Thread.sleep(200);
 			driver.findElement(By.xpath("//div[text()='Favourites']")).click();
-			Thread.sleep(500);
+			Thread.sleep(200);
 			driver.findElement(By.xpath("//div[text()='Unread']")).click();
 
 			System.out.println("Open Unread Chat list");
@@ -70,12 +67,11 @@ public class WhatsappPanel {
 	 
 	public Boolean AvailableChats() throws InterruptedException {
 		try {
-			Thread.sleep(2000);		
+			Thread.sleep(500);		
 			List<WebElement> NewChat = driver.findElements(By.xpath("//div[@class='x10l6tqk xh8yej3 x1g42fcv']/div/div/div/div[2]/div[2]/div[2]/span/div"));
 
 			if (NewChat.size() > 0) {
 				System.out.println("Available");
-				Thread.sleep(1000);	
 				return true;
 			}else {
 				return false;
@@ -87,7 +83,7 @@ public class WhatsappPanel {
 
 	public Boolean OpenChat() throws InterruptedException {
 		try {
-			Thread.sleep(2000);		
+			Thread.sleep(200);		
 			List<WebElement> NewChat = driver.findElements(By.xpath("//div[@class='x10l6tqk xh8yej3 x1g42fcv']/div/div/div/div[2]/div[2]/div[2]/span/div"));
 
 			if (NewChat.size() > 0) {

@@ -25,7 +25,19 @@ public class generateSentiment {
 			return ReturnMessage;
 		}else {
 			String History = ChatHistory.readFile(userName);
-			String ReturnMessage =  "Chat history: " + History +  "\nNew message: '" + newMessage + "'" + "\nBased on the chat history and the new message, generate a single, natural, and concise line as a reply. Your response should continue the conversation smoothly and sound like a genuine friend";
+			String ReturnMessage = "You are Robo, the user's friendly buddy.\r\n" +
+									"Talk casually, like a supportive friend, not like a formal assistant.\r\n" +
+									"Keep replies short and clear, but personal and caring.\r\n" +
+									"If the user is happy, celebrate with them.\r\n" +
+									"If the user is sad or stressed, comfort them.\r\n" +
+									"Avoid sounding robotic or too professional.\r\n" +
+									"Dont provide the multiple reply options provide sing reply.\r\n"+
+									"\r\n" +
+									"Chat History:\r\n" +
+									History + "\r\n" +
+									"\r\n" +
+									"User: " + newMessage + "\r\n" +
+									"Robo:";
 			ChatHistory.storeRecivedMessage(userName, newMessage);
 			// First message case
 			return ReturnMessage;

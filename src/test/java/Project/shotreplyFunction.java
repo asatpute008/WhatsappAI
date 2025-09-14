@@ -19,14 +19,14 @@ public class shotreplyFunction {
 
 
 			if(lowerMsg.contains("fev") && (lowerMsg.contains("like") || lowerMsg.contains("Food"))) {
-				returnValue = "Methi , siple dal, Rice, chapati";
+				returnValue = "Methi , simple dal, Rice, chapati";
 			};
 
 
 			// Map of keywords → reply
 			Map<String[], String> replyMap = new LinkedHashMap<>();
 
-			replyMap.put(new String[]{"hello", "hey", "hii", "how are you", "kasa aahes"}, "hello "+userId);
+			replyMap.put(new String[]{"hello", "hey", "hii","hi", "how are you", "kasa aahes"}, "hello "+userId);
 			replyMap.put(new String[]{"thank you", "thanks", "thx", "tnx"}, "Welcome!");
 			replyMap.put(new String[]{"bye", "goodbye", "see you", "take care"}, "Bye, take care!");
 			replyMap.put(new String[]{"what is your name", "your name", "who","who are you"}, "Hii, I am Aniket");

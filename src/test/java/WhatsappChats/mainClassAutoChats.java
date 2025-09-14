@@ -82,6 +82,7 @@ public class mainClassAutoChats {
 		int newMessageValue = 0;
 
 		newMessageLoop:do {
+			Thread.sleep(500);
 			newMessageValue++;
 			System.out.println("New Message Available - "+ newMessageValue);
 			String newMessage = whatsapp.readMessage();
@@ -89,14 +90,17 @@ public class mainClassAutoChats {
 			if(!oldMessage.equals(newMessage)) {
 				oldMessage = newMessage;
 				String userName = whatsapp.userName();
-				String replyGenerate = response.generateReply(userName, newMessage);			
+				String replyGenerate = response.generateReply(userName, newMessage);	
+				replyGenerate = EmojiUtil.safeEmoji(replyGenerate);
+				
+				System.out.println("Final Reply: "+ replyGenerate);
 				whatsapp.sendReply(replyGenerate);
 				newMessageValue = 0;
 			}
 
-			Thread.sleep(2000);
+			Thread.sleep(500);
 
-		}while(newMessageValue < 10);
+		}while(newMessageValue < 20);
 	}
 
 	//	public static void main(String[] args) throws InterruptedException, AWTException {
