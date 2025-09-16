@@ -30,3 +30,11 @@ OrderId,Date,FileName, OrderDetails
 CAFE012137,2025-09-01,Order_Boss, Pizza 
 CAFE012618,2025-09-01,Order_Boss, Soup Pizza 
 CAFE012137,2025-09-01,Order_Boss, Soup Pizza 
+CAFE010253,2025-09-17,Order_Boss, Burger 
+CAFE014444,2025-09-17,Order_Boss,null Burger-3, Coffee-2
+CAFE014936,2025-09-17,Order_Boss, Burger-1, Coffee-1
+CAFE014959,2025-09-17,Order_Boss, Burger-1, Coffee-1
+CAFE020044,2025-09-17,Order_Boss, Coffee-1, Burger-2, Pizza-2
+CAFE021345,2025-09-17,Order_Boss, Burger-1, Pizza-2, Coffee-1
+CAFE022459,2025-09-17,Order_Boss, Burger-1, Pizza-3, Coffee-1
+CAFE023141,2025-09-17,Order_Boss, Coffee-2, Burger-1

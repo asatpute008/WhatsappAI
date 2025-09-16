@@ -12,6 +12,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -168,7 +169,10 @@ public class WhatsappPanel {
 	public void sendReply(String replyText) throws InterruptedException, AWTException {
 		try {
 			Thread.sleep(200);
-			driver.findElement(By.xpath("//div[@aria-placeholder='Type a message']")).sendKeys(replyText);
+			WebElement replyMessage = driver.findElement(By.xpath("//div[@aria-placeholder='Type a message']"));			
+			Actions act = new Actions(driver);
+			act.click(replyMessage).sendKeys(replyText).perform();
+			
 			Thread.sleep(500);
 			try {
 				// Try Robot ENTER key first

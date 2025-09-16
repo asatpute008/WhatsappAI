@@ -16,7 +16,6 @@ public class mainClassAutoChats {
 	public mainClassAutoChats() {
 
 	}
-
 	static WhatsappPanel whatsapp = new  WhatsappPanel(Idriver);
 	static replyGenerator response = new replyGenerator(whatsapp.driver);
 	static mainClassAutoChats main = new mainClassAutoChats();
@@ -90,9 +89,7 @@ public class mainClassAutoChats {
 			if(!oldMessage.equals(newMessage)) {
 				oldMessage = newMessage;
 				String userName = whatsapp.userName();
-				String replyGenerate = response.generateReply(userName, newMessage);	
-				replyGenerate = EmojiUtil.safeEmoji(replyGenerate);
-				
+				String replyGenerate = response.generateReply(userName, newMessage);			
 				System.out.println("Final Reply: "+ replyGenerate);
 				whatsapp.sendReply(replyGenerate);
 				newMessageValue = 0;

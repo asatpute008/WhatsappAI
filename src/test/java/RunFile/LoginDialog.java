@@ -14,7 +14,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 class LoginDialog extends JDialog {
-
+   
+	
 
     private boolean authenticated = false;
 

@@ -21,7 +21,7 @@ public class mainClass {
                 frame.setSize(800, 600);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
-            } else {
+            }else {
                 System.exit(0);
             }
         });

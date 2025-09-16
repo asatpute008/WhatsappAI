@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 public class manageOrders {
 
     static StoreChatHistory Sheet = new StoreChatHistory();
-    static StoreChatHistory items = new  StoreChatHistory();
+//    static StoreChatHistory items = new  StoreChatHistory();
     static WhatsappPanel panelAction = new  WhatsappPanel();
     static manageOrders order = new manageOrders();
     LocalDateTime now = LocalDateTime.now();
@@ -22,7 +22,7 @@ public class manageOrders {
 		userOrder = "Order_"+userName;
 		boolean itemAvailibility = false;
 		
-		List<String> itemList = items.getItemList();
+		List<String> itemList = Sheet.getItemList();
 		StringBuilder resultBuilder = new StringBuilder();
 
 		for (int i = 0; i < itemList.size(); i++) {
@@ -72,12 +72,13 @@ public class manageOrders {
 		}else {
 			System.out.println("item is not availabe");
 		}
+		
 		return returnValue;
 	}
 	
 	
 	public String generateResponse(String userFile, String Message) {
-		 items.storeCustomerOrder(userFile, Message);
+		 Sheet.storeCustomerOrder(userFile, Message);
 		 String returnValue = Sheet.readFile(userFile);
 		return returnValue;
 		

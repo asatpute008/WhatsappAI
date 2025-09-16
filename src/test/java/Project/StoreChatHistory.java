@@ -14,13 +14,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class StoreChatHistory {
 
 	static StoreChatHistory Sheet = new StoreChatHistory();
-	
+
 	public void storeRecivedMessage(String userID, String Message) {
 		String data = "\nUser: "+ Message;
 
@@ -33,32 +35,64 @@ public class StoreChatHistory {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void storeCustomerOrder(String userID, String Message) {
-		
-//		  if(Sheet.checkFileExists(userID) == false) {
-//			  Sheet.createCustomerOrderFile(userID);
-//		  }
-		     String data =   Message +" ";
+
+	    try {
+	        File file = new File("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt");
+	        Map<String, Integer> orderMap = new LinkedHashMap<>();
+
+	        // ✅ Step 1: Read existing data from file
+	        if (file.exists()) {
+	            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+	                String line = reader.readLine(); // only one line
+	                if (line != null && !line.isEmpty()) {
+	                    String[] items = line.split(", ");
+	                    for (String item : items) {
+	                        String[] parts = item.split("-");
+	                        if (parts.length == 2) {
+	                            orderMap.put(parts[0].trim(), Integer.parseInt(parts[1].trim()));
+	                        }
+	                    }
+	                }
+	            }
+	        }
+
+	        // ✅ Step 2: Normalize incoming message
+	        // message could be "Burger Pizza" or just "Burger"
+	        String[] newItems = Message.trim().split("\\s+");
+	        for (String newItem : newItems) {
+	            if (!newItem.isEmpty()) {
+	                orderMap.put(newItem, orderMap.getOrDefault(newItem, 0) + 1);
+	            }
+	        }
+
+	        // ✅ Step 3: Write updated totals back to file
+	        try (FileWriter writer = new FileWriter(file, false)) {
+	            StringBuilder sb = new StringBuilder();
+	            for (Map.Entry<String, Integer> entry : orderMap.entrySet()) {
+	                sb.append(entry.getKey()).append("-").append(entry.getValue()).append(", ");
+	            }
+	            if (sb.length() > 2) {
+	                sb.setLength(sb.length() - 2); // remove last ", "
+	            }
+	            writer.write(sb.toString());
+	        }
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public void createCustomerOrderFile(String fileName) {
+
 		try {
-			FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt", true); // true = append mode
-			writer.write(data);
-			writer.close();
-			//	        	    System.out.println("Recived message appended successfully to " + userID + ".txt");
+			FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" +fileName + ".txt", true); // true = append mode
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-  public void createCustomerOrderFile(String fileName) {
-
-			try {
-				FileWriter writer = new FileWriter("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" +fileName + ".txt", true); // true = append mode
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-  }
 
 	public void storeReplyMessage(String userID, String Message) {
 		String data = "\nRobo: "+ Message;
@@ -98,11 +132,11 @@ public class StoreChatHistory {
 		}
 	}
 
-	public String readFile(String userID) {
+	public static String readFile(String userID) {
 
 		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt";
 		int lastLines = 20;
-		String returnvalue = "" ;
+		String returnvalue = "" ; 
 		List<String> lines = new LinkedList<>();
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -126,183 +160,185 @@ public class StoreChatHistory {
 	}
 
 	public String readFileLastLine(String userID) {
-	    String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt";
-	    String lastLine = null;
+		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt";
+		String lastLine = null;
 
-	    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-	        String line;
-	        int lineValue = 0;
-	        while ((line = reader.readLine()) != null ) {
-	            lastLine = line; // keep overwriting until the last line
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return null;
-	    }
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			String line;
+			int lineValue = 0;
+			while ((line = reader.readLine()) != null ) {
+				lastLine = line; // keep overwriting until the last line
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 
-	    return lastLine;
+		return lastLine;
 	}
-	
+
 
 	public boolean checkFileExists(String userID) {
 		File file = new File("D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\" + userID + ".txt");
 		return file.exists() && file.isFile(); // Ensures it's a file, not directory
 	}
-	
+
 	public void creatOrderList() {
 		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\menuList.csv";
 
-        // Updated CSV Header
-        String header = "Id,Menu Item,Stock";
+		// Updated CSV Header
+		String header = "Id,Menu Item,Stock";
 
-        try (FileWriter writer = new FileWriter(filePath)) {
-            writer.append(header);
-            System.out.println("CSV file created successfully at: " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		try (FileWriter writer = new FileWriter(filePath)) {
+			writer.append(header);
+			System.out.println("CSV file created successfully at: " + filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void CustomerList() {
 		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\customerList.csv";
 
-        // Updated CSV Header
-        String header = "OrderId,Date,FileName, OrderDetails";
+		// Updated CSV Header
+		String header = "OrderId,Date,FileName, OrderDetails";
 
-        try (FileWriter writer = new FileWriter(filePath)) {
-            writer.append(header);
-            System.out.println("CSV file created successfully at: " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		try (FileWriter writer = new FileWriter(filePath)) {
+			writer.append(header);
+			System.out.println("CSV file created successfully at: " + filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void addCustomerOrderDetails(String OrderId, String Date, String FileName, String OrderDetails) {
 		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\customerList.csv";
-             System.out.println("Order Details: "+ OrderDetails);
-        // Updated CSV Header
-		 String orderDetailsRow = "\n" + OrderId + "," + Date + "," + FileName + "," + OrderDetails;
+		System.out.println("Order Details: "+ OrderDetails);
+		// Updated CSV Header
+		String orderDetailsRow = "\n" + OrderId + "," + Date + "," + FileName + "," + OrderDetails;
 
-	        try (FileWriter writer = new FileWriter(filePath, true)) { // true = append mode
-	            writer.append(orderDetailsRow);
-	            System.out.println("Row appended successfully at: " + filePath);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+		try (FileWriter writer = new FileWriter(filePath, true)) { // true = append mode
+			writer.append(orderDetailsRow);
+			System.out.println("Row appended successfully at: " + filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public List<String> getCustomerOrderDetails(String orderId) {
 		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\customerList.csv";
-		  List<String> returnValues = new ArrayList<>();
+		List<String> returnValues = new ArrayList<>();
 		try {
-			
-			 List<String> lines = Files.readAllLines(Paths.get(filePath));
 
-			 // Skip header (index 0)
-	            for (int i = 1; i < lines.size(); i++) {
-	                String[] columns = lines.get(i).split(",");
+			List<String> lines = Files.readAllLines(Paths.get(filePath));
 
-	                if (columns.length >= 4 && columns[0].trim().equals(orderId)) {
-//	                    List<String> row = new ArrayList<>();
-	                	returnValues.add(columns[0].trim()); // OrderId
-	                	returnValues.add(columns[1].trim()); // Date
-	                	returnValues.add(columns[2].trim()); // FileName
-	                	returnValues.add(columns[3].trim()); // OrderDetails
+			// Skip header (index 0)
+			for (int i = 1; i < lines.size(); i++) {
+				String[] columns = lines.get(i).split(",");
 
-	                    	
-	                }
-	            }
-            System.out.println(returnValues);
-			
+				if (columns.length >= 4 && columns[0].trim().equals(orderId)) {
+					//	                    List<String> row = new ArrayList<>();
+					returnValues.add(columns[0].trim()); // OrderId
+					returnValues.add(columns[1].trim()); // Date
+					returnValues.add(columns[2].trim()); // FileName
+					returnValues.add(columns[3].trim()); // OrderDetails
+
+
+				}
+			}
+			System.out.println(returnValues);
+
 		}catch(IOException e) {
-            e.printStackTrace();
-        }
-		
+			e.printStackTrace();
+		}
+
 		return returnValues;
 	}
-	
+
 	public void addNewItem(String itemName) {
-		 String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\menuList.csv";
-	        String menuItem = itemName;
-	        int stock = 0;
+		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\menuList.csv";
+		String menuItem = itemName;
+		int stock = 0;
 
-	        try {
-	            // Read all lines from the CSV file
-	            List<String> lines = Files.readAllLines(Paths.get(filePath));
+		try {
+			// Read all lines from the CSV file
+			List<String> lines = Files.readAllLines(Paths.get(filePath));
 
-	         // If file has only header or empty
-	            int newId = 1;
-	            if (lines.size() > 1) {
-	                // Get the last data line (not header)
-	                String lastLine = lines.get(lines.size() - 1);
-	                String[] columns = lastLine.split(",");
+			// If file has only header or empty
+			int newId = 1;
+			if (lines.size() > 1) {
+				// Get the last data line (not header)
+				String lastLine = lines.get(lines.size() - 1);
+				String[] columns = lastLine.split(",");
 
-	                // Parse last Id
-	                newId = Integer.parseInt(columns[0].trim()) + 1;
-	            }     
+				// Parse last Id
+				newId = Integer.parseInt(columns[0].trim()) + 1;
+			}     
 
-	            // Prepare new row
-	            String newRow = "\n" + newId + "," + menuItem + "," + stock;
+			// Prepare new row
+			String newRow = "\n" + newId + "," + menuItem + "," + stock;
 
-	            // Append new row
-	            try (FileWriter writer = new FileWriter(filePath, true)) {
-	                writer.append(newRow);
-	            }
+			// Append new row
+			try (FileWriter writer = new FileWriter(filePath, true)) {
+				writer.append(newRow);
+			}
 
-	            System.out.println("Row added successfully: " + newRow);
+			System.out.println("Row added successfully: " + newRow);
 
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-     
+
 	public List<String> getItemList() throws IOException {
 
-        String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\menuList.csv";
+		String filePath = "D:\\Aniket\\Automation\\Project-2\\WhatsappAI\\target\\OrderManage\\menuList.csv";
 
-        List<String> menuItems = new ArrayList<>();
+		List<String> menuItems = new ArrayList<>();
 
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(filePath));
+		try {
+			List<String> lines = Files.readAllLines(Paths.get(filePath));
 
-            // Skip header (start from index 1)
-            for (int i = 1; i < lines.size(); i++) {
-                String[] columns = lines.get(i).split(",");
-                if (columns.length >= 2) {
-                    menuItems.add(columns[1].trim()); // Add Menu Item
-                }
-            }
+			// Skip header (start from index 1)
+			for (int i = 1; i < lines.size(); i++) {
+				String[] columns = lines.get(i).split(",");
+				if (columns.length >= 2) {
+					menuItems.add(columns[1].trim()); // Add Menu Item
+				}
+			}
 
-//            System.out.println("Menu Items: " + menuItems);
+			//            System.out.println("Menu Items: " + menuItems);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return menuItems;
-		 
+
 	}
 
 
 	public static void main(String[] args) throws IOException {
 		StoreChatHistory Help = new StoreChatHistory();
-//		String UserName = "TestFile";
-//		String test = "Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is (222) aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniketHii my name is aniketHii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniketHii my name is aniketHii(33) my name is aniket";
-//		Help. checkFileExists("Aniket");
-//		Help.storeReplyMessage("Aniket", "test");
-//
-//		Help.readFile("Aniket");
-//		Help.copyImage();
-//		Help.creatOrderList();
-//		Help.addNewItem("Veg-Roll");
-//		List<String> list =Help.getItemList();
-//		System.out.println(list);
-//		Help.CustomerList();
-//		Help.addCustomerOrderDetails("101", "2025-08-31", "Order_Aniket","\"vada-Pav,Pizza\"");
-		
-//		Help.getCustomerOrderDetails("102");
-//		Help.createCustomerOrderFile("Test");
-		
-		System.out.println("Last Line"+Help.readFileLastLine("Boss"));
-		
+		//		String UserName = "TestFile";
+		//		String test = "Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is (222) aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniketHii my name is aniketHii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniket Hii my name is aniketHii my name is aniketHii(33) my name is aniket";
+		//		Help. checkFileExists("Aniket");
+		//		Help.storeReplyMessage("Aniket", "test");
+		//
+		//		Help.readFile("Aniket");
+		//		Help.copyImage();
+		//		Help.creatOrderList();
+		//		Help.addNewItem("Veg-Roll");
+		//		List<String> list =Help.getItemList();
+		//		System.out.println(list);
+		//		Help.CustomerList();
+		//		Help.addCustomerOrderDetails("101", "2025-08-31", "Order_Aniket","\"vada-Pav,Pizza\"");
+
+		//		Help.getCustomerOrderDetails("102");
+		//		Help.createCustomerOrderFile("Test");
+
+		//		System.out.println("Last Line"+Help.readFileLastLine("Boss"));
+		Help.storeCustomerOrder("Order_Boss", "Burger");
+
+
 	}
 }
