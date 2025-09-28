@@ -45,7 +45,7 @@ public class manageOrders {
 			String Response = order.generateResponse(userOrder, currentLastMessage);
 			System.out.println("item is available:" + Response);
 			returnValue = "Your Food is"+Response;
-		}else if("Yes".equals(currentLastMessage)){
+		}else if("yes".equals(currentLastMessage.toLowerCase())){
 			
 			//current date and time 
 			DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -1,5 +1,6 @@
 package WhatsappChats;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
@@ -20,7 +21,7 @@ public class replyGenerator {
      	 
       }
       
-	public String generateReply(String userID, String messageText) {
+	public String generateReply(String userID, String messageText) throws IOException, InterruptedException {
 
 		try {
 			String returnValue;

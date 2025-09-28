@@ -1,7 +1,0 @@
-
-User: Hello line
-User: Hello line
-Robo: Kasa aahes tu
-User: Hello line
-User: Hello line
-Robo: Kasa aahes tu

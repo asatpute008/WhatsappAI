@@ -1,5 +1,6 @@
 package Project;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -44,7 +45,7 @@ public class openWhatsapp {
 
 
   // CheckChats Chat List 
-	public void readCurrentMessage() throws InterruptedException {
+	public void readCurrentMessage() throws InterruptedException, IOException {
 		do {
 			Thread.sleep(500);
 			driver.findElement(By.xpath("//div[text()='Favourites']")).click();
@@ -59,7 +60,7 @@ public class openWhatsapp {
 	}
 
 
-	public String ChatAvailibility() throws InterruptedException {
+	public String ChatAvailibility() throws InterruptedException, IOException {
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		List<WebElement> NewChat = driver.findElements(By.xpath("//div[@class='x10l6tqk xh8yej3 x1g42fcv']/div/div/div/div[2]/div[2]/div[2]/span/div"));
@@ -85,7 +86,7 @@ public class openWhatsapp {
 		}
 	}
 
-	public String replyMessage() throws InterruptedException {
+	public String replyMessage() throws InterruptedException, IOException {
     
 		   String returnValue = null;
 		//long startTime = System.currentTimeMillis(); // start time

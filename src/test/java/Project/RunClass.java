@@ -206,7 +206,7 @@ public class RunClass {
 		return true;
 	}
 
-	public boolean BossChats(String userIdboss, String bossMessage) throws InterruptedException, AWTException {
+	public boolean BossChats(String userIdboss, String bossMessage) throws InterruptedException, AWTException, IOException {
 		int BossChat = 0;
 		Help.sendReply("Hello "+ userIdboss);
 		Thread.sleep(100);

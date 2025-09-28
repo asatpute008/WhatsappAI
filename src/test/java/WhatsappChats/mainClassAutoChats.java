@@ -1,6 +1,7 @@
 package WhatsappChats;
 
 import java.awt.AWTException;
+import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 
@@ -24,7 +25,7 @@ public class mainClassAutoChats {
 	String oldMessage = "null" ;
 
 	@SuppressWarnings({ "unused", "null" })
-	public void ExecuteWhatsappChats() throws InterruptedException, AWTException {
+	public void ExecuteWhatsappChats() throws InterruptedException, AWTException, IOException {
 
 		whatsapp.openWhatsapp();
 
@@ -77,7 +78,7 @@ public class mainClassAutoChats {
 	}
 
 	@SuppressWarnings("unused")
-	public void readAndsend() throws InterruptedException, AWTException {
+	public void readAndsend() throws InterruptedException, AWTException, IOException {
 		int newMessageValue = 0;
 
 		newMessageLoop:do {

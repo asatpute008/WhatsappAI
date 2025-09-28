@@ -56,6 +56,7 @@ public class GenerateOrderReply {
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException, AWTException {
-		System.out.println(GenerateOrderReply.generateReply("Boss", "Piss"));
+//		System.out.println(GenerateOrderReply.generateReply("Boss", "Piss"));
+		userFile.deleteFile("Order_Boss");
 	}
 }
